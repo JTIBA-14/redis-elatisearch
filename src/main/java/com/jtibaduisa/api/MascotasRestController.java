@@ -3,6 +3,7 @@ package com.jtibaduisa.api;
 import com.jtibaduisa.entity.Mascotas;
 import com.jtibaduisa.respository.IMascostasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,7 +33,7 @@ public class MascotasRestController {
     }
 
     @GetMapping(path = "/{idMascota}")
-    @Cacheable( value = "mascota", key = "#idMascota")
+    @Cacheable(value = "mascota", key = "#idMascota")
     public Optional<Mascotas> getByIdMascota(@PathVariable String idMascota) {
         System.out.println("Consultando en elasticsearch");
         return iMascotas.findById(idMascota);
